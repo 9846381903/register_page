@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-1.0
+  template:
+    metadata:
+      labels:
+        app: frontend-1.0
+    spec:
+      imagePullSecrets:
+        - name: registry-credentials
+      containers:
+        - name: frontend
+          image: registry.gitlab.com/akshay.s3/container_registery_for_cloudash/register/frontend:4.58
+          ports:
+            - containerPort: 80
+          imagePullPolicy: IfNotPresent

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-1.0
+  template:
+    metadata:
+      labels:
+        app: backend-1.0
+    spec:
+      imagePullSecrets:
+      - name: registry-credentials
+      containers:
+      - name: backend
+        image: registry.gitlab.com/akshay.s3/container_registery_for_cloudash/register/backend:3.71
+        envFrom:
+        - secretRef:
+            name: mysql-secret
+        - secretRef:
+            name: smtp-secret
+        command:
+        - /bin/bash
+        - -c
+        - python3 module.py
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always

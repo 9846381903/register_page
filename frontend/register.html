@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cloudash Pre-Register Page</title>
+    <link rel="icon" href="assets/images/cclogo.png" type="image/png"> <!-- Added PNG favicon here -->
+    <link rel="stylesheet" href="assets/vendors/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        .top-left-logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            width: 100px;
+            height: auto;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            overflow: auto;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Adjust width here for the rectangle */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://clockhash.com" target="_blank">
+        <img src="assets/images/clogo.png" alt="Company Logo" class="top-left-logo">
+    </a>
+
+    <header class="foi-header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light foi-navbar">
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/images/logo.png" alt="FOI">
+                </a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav mt-2 mt-lg-0">
+                        <!-- Your navigation items here -->
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-auth">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <section class="auth-wrapper">
+                        <div class="row">
+                            <div class="col-md-6 mb-4 mb-md-0">
+                                <h2 class="auth-section-title">Pre-Register</h2>
+                                <p class="auth-section-subtitle">Pre-Register to get Cloudash access earlier!</p>
+                                <form id="register-form" action="javascript:void(0)" method="POST">
+                                    <div class="form-group">
+                                        <label for="username">Username <sup>*</sup></label>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email <sup>*</sup></label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile-number">Mobile Number <sup>*</sup></label>
+                                        <input type="text" class="form-control" id="mobile-number" name="mobile-number" placeholder="Mobile Number" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="company-name">Company Name (Optional)</label>
+                                        <input type="text" class="form-control" id="company-name" name="company-name" placeholder="Company Name">
+                                    </div>
+                                    <button class="btn btn-primary btn-auth-submit" type="submit">Pre-Register</button>
+                                </form>
+                            </div>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <img src="assets/images/Register.png" alt="register" class="img-fluid">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- OTP Modal -->
+    <div id="otpModal" class="modal">
+        <div class="modal-content p-4">
+            <span class="close d-block text-right mb-3" onclick="closeOtpModal()">&times;</span>
+            <h3 class="auth-section-title">Enter OTP</h3>
+            <input type="text" id="otpInput" class="form-control mb-3" placeholder="Enter the OTP from your email ID." required>
+            <button onclick="submitOtp()" class="btn btn-primary btn-auth-submit">Submit</button>
+        </div>
+    </div>
+
+    <!-- Response Modal -->
+    <div id="responseModal" class="modal">
+        <div class="modal-content p-4">
+            <span class="close d-block text-right mb-3" onclick="closeResponseModal()">&times;</span>
+            <p id="serverResponse" class="form-group"></p>
+        </div>
+    </div>
+
+    <footer class="foi-footer text-white">
+        <div class="container">
+            <div class="row footer-content">
+                <div class="col-xl-6 col-lg-7 col-md-8">
+                    <h2 class="mb-0">Do you want to know more or just have a question? Write to us.</h2>
+                </div>
+                <div class="col-md-4 col-lg-5 col-xl-6 py-3 py-md-0 d-md-flex align-items-center justify-content-end">
+                    <a href="https://clockhash.com/contact" class="btn btn-danger btn-lg" target="_blank">Contact form</a>
+                </div>
+            </div>
+            <div class="row footer-widget-area">
+                <div class="col-md-12">
+                    <p class="text-center">
+                        &copy; Copyright <a href="https://clockhash.com/" target="_blank">ClockHash</a>. 2023 All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="register.js"></script>
+</body>
+
+</html>
+
